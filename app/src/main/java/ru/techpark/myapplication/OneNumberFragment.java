@@ -2,6 +2,7 @@ package ru.techpark.myapplication;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -25,13 +26,15 @@ public class OneNumberFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        if (savedInstanceState != null) {
+            number = new Number(savedInstanceState.getInt("number"));
+        }
         View view = inflater.inflate(R.layout.fragment_one_item, container, false);
 
         item_number = (TextView) view.findViewById(R.id.item_number);
@@ -40,6 +43,11 @@ public class OneNumberFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("number", number.getNumber());
+    }
 
     public void setNumber(Number number) {
         this.number = number;

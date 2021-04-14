@@ -5,6 +5,11 @@ import android.graphics.Color;
 
 public class Number {
     private Integer value;
+
+    public void setColor(Integer color) {
+        this.color = color;
+    }
+
     private Integer color;
 
     public Number(Integer value) {
